@@ -140,11 +140,4 @@ Stop the flink job by running the below command inside your working directory. U
 flink stop -p . <FLINK_JOB_ID>
 ```
 
-Stop the local Standalone flink cluster.
-```
-cd <ABSOLUTE_PATH_WHERE_FLINK_IS_DOWNLOADED>/flink-1.20.3/bin
-
-# To stop the Flink cluster
-./stop-cluster.sh
-```
 
