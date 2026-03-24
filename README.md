@@ -3,14 +3,6 @@
 ## Overview
 This repo walks you through an e-commerce use case, enriching real-time orders and products streams, performing windowed aggregation to count every products order count per window interval with Open Source Flink. This repo will give you step by step guide on how to run this use case end-to-end.
 
-## Technologies Used
-- Kafka & Schema Registry clusters
-- Python
-- Open Source Flink
-- Java 11
-- Maven
-- Postgres DB
-
 ## Architecture
 
 ![Architecture Diagram](assets/architecture_diagram_with_background.png)
@@ -34,7 +26,7 @@ This architecure involves:
 
 - Local Software Requirements:
   - [Python UV package manager](https://pypi.org/project/uv/)
-  - [Apache Flink Standalone software (Version 1.20.3)](https://dlcdn.apache.org/flink/flink-1.20.3/flink-1.20.3-bin-scala_2.12.tgz)
+  - [Flink software]
   - [Java 11](https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html)
   - [Apache Maven](https://maven.apache.org/download.cgi)
 
@@ -45,24 +37,8 @@ git clone https://github.com/RakeshNKundar/cp_flink_ecommerce_usecase.git
 
 ## Quick Start
 
-### Step 1: Download and Install Apache Flink software
-  Download the Apache Flink software by following the link on the [Local software in Requirements section](#Requirements). This will download the software to your local machine. Untar the file and add the `bin/` folder to your system `PATH` variable to run flink command. You can follow the below command if you are using a MAC device.
-
-  ```
-  sudo vi ~/.zshrc
-  
-  -- Add the below line at the end of the file
-  export PATH=$PATH:<ABSOLUTE_PATH_WHERE_FLINK_IS_DOWNLOADED>/flink-1.20.3/bin
-  ```
-
-  Run the below `flink` command to verify the installation
-  ```
-  flink --version
-  ```
-  You should get the below output if flink is setup successfully.
-  ```
-  Version: 1.20.3, Commit ID: 01e3a6d
-  ```
+### Step 1: Download and Install Flink
+Please refer to the official documentation https://docs.confluent.io/platform/current/flink/get-started/get-started-application.html
 
 ### Step 2: Create products table on the Postgres DB.
 Run the below command to create a `product` table under `postgres` database and `public` schema. 
@@ -111,23 +87,12 @@ mvn clean package
 ```
 
 ### Step 4: Start a local Flink cluster
-Before running a Flink Job, you need to start a local Flink cluster on your laptop/VM. You can run a standalone Flink cluster with `1` task slot which can be used for simple Flink job by following the below commands
-
-```
-# Navigate to the directory where Flink 1.20.3 is downloaded
-cd <ABSOLUTE_PATH_WHERE_FLINK_IS_DOWNLOADED>/flink-1.20.3/bin
-
-# Run the below command to start a Flink cluster
-./start-cluster.sh
-```
-This will start a standalone deamon flink cluster on your localhost machine.
-
 On your browser type the URL `http://localhost:8081/#/overview` to view the Flink Web Dashboard. You should see something similart to the below image.
 
 ![Flink Web Image](assets/flink_web_ss.png)
 
 ### Step 5: Submit a Flink Job to the local Flink cluster
-So, We have our Flink standalone cluster running now, The next step is to compile your Flink job and submit it to the Flink cluster. We will use the `flink` CLI to perform this operation.
+The next step is to compile your Flink job and submit it to the Flink cluster. We will use the `flink` CLI to perform this operation.
 
 ```
 flink run -py postgres_cdc_flink_job.py
